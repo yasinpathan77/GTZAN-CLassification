@@ -1,0 +1,43 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.env
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Upload directory (temporary files)
+uploads/
+
+# Log files
+logs/
+*.log
+
+# Large audio dataset (will be downloaded separately)
+Data-2/genres_original/
+Data-2/images_original/
+
+# Keep the CSV feature files and model
+!Data-2/features_30_sec.csv
+!Data-2/features_3_sec.csv
+!gtzan_genre_classifier.pth
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Local configuration
+config.local.py
+
+# Development settings
+.claude/
