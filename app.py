@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
+app.config['UPLOAD_FOLDER'] = 'uploads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Audio processing constants
 SAMPLE_RATE = 22050
@@ -290,7 +292,7 @@ def debug():
 def serve_audio(genre, filename):
     """Serve audio files for playback"""
     try:
-        audio_path = f"data/genres_original/{genre}"
+        audio_path = f"test_data/{genre}"
         return send_from_directory(audio_path, filename)
     except Exception as e:
         logger.error(f"Error serving audio file: {e}")
@@ -339,7 +341,7 @@ def predict_sample(genre, filename):
             return jsonify({"error": "Invalid genre"}), 400
         
         # Construct file path
-        file_path = f"data/genres_original/{genre}/{filename}"
+        file_path = f"test_data/{genre}/{filename}"
         
         if not os.path.exists(file_path):
             return jsonify({"error": "Sample file not found"}), 404
@@ -367,7 +369,7 @@ def get_samples(genre):
         if genre not in GENRES:
             return jsonify({"error": "Invalid genre"}), 400
         
-        genre_path = f"data/genres_original/{genre}"
+        genre_path = f"test_data/{genre}"
         if not os.path.exists(genre_path):
             return jsonify({"error": "Genre folder not found"}), 404
         
